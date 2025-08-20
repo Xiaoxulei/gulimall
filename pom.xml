@@ -16,6 +16,7 @@
         <module>gulimall-member</module>
         <module>gulimall-coupon</module>
         <module>renren-fast</module>
+        <module>renren-generator</module>
     </modules>
     <groupId>com.xuxiaolei</groupId>
     <artifactId>gulimall</artifactId>
