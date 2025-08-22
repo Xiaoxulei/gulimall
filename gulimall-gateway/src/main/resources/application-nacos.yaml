@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+        namespace: gateway
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        username: nacos
+        password: nacos
+        namespace: gateway
+        import-check:
+          enabled: false

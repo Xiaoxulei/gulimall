@@ -3,12 +3,14 @@ package com.xuxiaolei.gulimall.product;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author: xuxiaolei
  * @Description: TODO: ${description}
  * @CreatTime: 2025/08/21 14:55
  **/
+@EnableDiscoveryClient
 @SpringBootApplication
 @MapperScan("com.xuxiaolei.gulimall.product.dao")
 public class ProductMainApplication {
