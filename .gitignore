@@ -15,3 +15,77 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+# =========================
+# Maven / Java
+# =========================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# =========================
+# OS generated
+# =========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# =========================
+# Spring Boot / application
+# =========================
+spring.log
+*.properties.local
+*.yml.local
+
+# =========================
+# Node / Frontend (if you have Vue/React)
+# =========================
+node_modules/
+dist/
+build/
+.env
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+*.dockerfile
+*.pid
+*.lock
+
+# =========================
+# Others
+# =========================
+.idea_modules/
+*.class
+*.war
+*.jar
+*.ear
