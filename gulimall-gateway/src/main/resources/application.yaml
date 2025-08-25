@@ -4,7 +4,7 @@ spring:
   application:
     name: gulimall-gateway
   profiles:
-    include: nacos
+    include: nacos,route
   main:
     web-application-type: reactive
   autoconfigure:
