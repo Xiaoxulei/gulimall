@@ -12,6 +12,8 @@ server:
 
 spring:
   # 环境 dev|test|prod
+  application:
+    name: renren-fast
   profiles:
     active: dev
   # jackson时间格式化
@@ -31,7 +33,16 @@ spring:
 #  resources:
 #    add-mappings: false
 
-
+  #nacos配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+      config:
+        import-check:
+          enabled: false
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml

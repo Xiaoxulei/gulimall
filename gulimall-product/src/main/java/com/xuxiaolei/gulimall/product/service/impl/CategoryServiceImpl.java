@@ -2,8 +2,7 @@ package com.xuxiaolei.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -33,12 +32,38 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public List<CategoryEntity> listWithTree() {
         //查询所有
-        List<CategoryEntity> list = list();
-        //找到一级分类
+        List<CategoryEntity> allCategories = list();
+        /*//找到一级分类
         List<CategoryEntity> levelOneMenus = list.stream().filter(categoryEntity ->
            categoryEntity.getParentCid() == 0
-        ).collect(Collectors.toList());
-        return levelOneMenus;
+        ).collect(Collectors.toList());*/
+
+//        List<CategoryEntity> tree = buildCategoryTree(allCategories);
+        return buildCategoryTree(allCategories);
+
     }
+
+    public List<CategoryEntity> buildCategoryTree(List<CategoryEntity> all) {
+        // 1. 按 parentCid 分组，减少递归时全表扫描
+        Map<Long, List<CategoryEntity>> parentMap = all.stream()
+                .collect(Collectors.groupingBy(CategoryEntity::getParentCid));
+
+        // 2. 构建树 & 排序
+        return all.stream()
+                .filter(cat -> cat.getParentCid() == 0)
+                .peek(cat -> cat.setChildren(getChildren(cat.getCatId(), parentMap)))
+                .sorted(Comparator.comparingInt(c -> Optional.ofNullable(c.getSort()).orElse(0)))
+                .collect(Collectors.toList());
+    }
+
+    private List<CategoryEntity> getChildren(Long parentId, Map<Long, List<CategoryEntity>> parentMap) {
+        List<CategoryEntity> children = parentMap.getOrDefault(parentId, new ArrayList<>());
+
+        children.forEach(child -> child.setChildren(getChildren(child.getCatId(), parentMap)));
+        children.sort(Comparator.comparingInt(c -> Optional.ofNullable(c.getSort()).orElse(0)));
+
+        return children;
+    }
+
 
 }
