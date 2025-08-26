@@ -43,6 +43,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     }
 
+    @Override
+    public void deleteMenuByIds(Long[] catIds) {
+        //TODO: 检查当前删除的菜单，是否被别的地方引用
+        removeByIds(Arrays.asList(catIds));
+    }
+
     public List<CategoryEntity> buildCategoryTree(List<CategoryEntity> all) {
         // 1. 按 parentCid 分组，减少递归时全表扫描
         Map<Long, List<CategoryEntity>> parentMap = all.stream()

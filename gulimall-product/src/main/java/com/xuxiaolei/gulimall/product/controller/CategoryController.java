@@ -6,11 +6,7 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.xuxiaolei.gulimall.product.entity.CategoryEntity;
 import com.xuxiaolei.gulimall.product.service.CategoryService;
@@ -35,7 +31,7 @@ public class CategoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list/tree")
+    @GetMapping("/list/tree")
     public R list(){
         List<CategoryEntity> list = categoryService.listWithTree();
 
@@ -74,12 +70,13 @@ public class CategoryController {
     }
 
     /**
+     * @RequestBody,接收请求体，必须是post方法
      * 删除
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
-
+//		categoryService.removeByIds(Arrays.asList(catIds));
+        categoryService.deleteMenuByIds(catIds);
         return R.ok();
     }
 
